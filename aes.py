@@ -83,12 +83,17 @@ def mix_columns(state, mode=False):
     res = []
     for i in range(4):
         col = state[i * 4:(i + 1) * 4]
+        col = [0x4a, 0xb3, 0x11, 0x21]
         temp = []
+        print('rd_column: ', end='')
+        hexprint(col)
         for j in range(len(col)):
             temp.append(0)
             for k in range(len(m)):
                 temp[j] ^= mult(col[k], m[k])
             m = shift_arr(m, 1, True)
+        print('mixed_col: ', end='')
+        hexprint(temp)
         res.extend(temp)
     return res
 
@@ -137,6 +142,7 @@ def encrypt(block, key, nb=4, nr=10):
     state = [s_box(a) for a in state]
     state = shift_rows(state)
     add_round_key(state, keys[nr * n:])
+    hexprint(state)
     return "".join(map(chr, state))
 
 
@@ -166,12 +172,15 @@ def decrypt(block, key, nb=4, nr=10):
 #         arr[i].append(i + j)
 # arr = [219, 19, 83, 69, 242, 10, 34, 92, 213, 213, 215, 214, 45, 38, 49, 76]
 # print(arr)
-# arr = mix_columns(arr)
+# arr = mix_columns(arr)S
 # print(arr)
-# print(list(map(ord,'qwertyuiopasdfgh')))
-key = 'zxcvbshfdysywirt'
-enc = encrypt('qwertyuiopasdfgh', key)
-print(enc)
+word = 'JeanMishelDakuo2'
+key = 'Krikunhohhahahah'
+print("Source word:", word)
+print("Key:", key)
+enc = encrypt(word, key)
+print("Encrypted data:", enc)
 dec = decrypt(enc, key)
-print(dec)
-# print(exkey)
+print("Decrypted data:", dec)
+
+print(bin(field.mult(0x4a,0x02))[2:])

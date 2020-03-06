@@ -84,13 +84,15 @@ def mix_columns(state, mode=False):
     for i in range(4):
         col = state[i * 4:(i + 1) * 4]
         temp = []
-        hexprint(col)
+        # print('rd_column: ', end='')
+        # hexprint(col)
         for j in range(len(col)):
             temp.append(0)
             for k in range(len(m)):
                 temp[j] ^= mult(col[k], m[k])
             m = shift_arr(m, 1, True)
-        hexprint(temp)
+        # print('mixed_col: ', end='')
+        # hexprint(temp)
         res.extend(temp)
     return res
 
@@ -179,5 +181,3 @@ enc = encrypt(word, key)
 print("Encrypted data:", enc)
 dec = decrypt(enc, key)
 print("Decrypted data:", dec)
-
-print(bin(field.mult(0x4a,0x02))[2:])

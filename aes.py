@@ -83,16 +83,13 @@ def mix_columns(state, mode=False):
     res = []
     for i in range(4):
         col = state[i * 4:(i + 1) * 4]
-        col = [0x4a, 0xb3, 0x11, 0x21]
         temp = []
-        print('rd_column: ', end='')
         hexprint(col)
         for j in range(len(col)):
             temp.append(0)
             for k in range(len(m)):
                 temp[j] ^= mult(col[k], m[k])
             m = shift_arr(m, 1, True)
-        print('mixed_col: ', end='')
         hexprint(temp)
         res.extend(temp)
     return res

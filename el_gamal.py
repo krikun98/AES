@@ -10,7 +10,7 @@ g = 2
 def encrypt(message, y):
     block = int(bytearray(message, 'utf8').hex(), 16)
     k = random.randint(1, field.r-1)
-    print('sor_block', hex(block)[2:])
+    # print('sor_block', hex(block)[2:])
     a = field.mon_exp_kor(g, k)
     b = field.mult(field.mon_exp_kor(y, k), block)
     return a, b
@@ -20,7 +20,7 @@ def decrypt(a, b, x):
     a_t = field.mon_exp_kor(a, x)
     a_inv = field.inv(a_t)
     m = field.mult(b, a_inv)
-    print('dec_block', hex(m)[2:])
+    # print('dec_block', hex(m)[2:])
     message = bytearray.fromhex(hex(m)[2:]).decode('utf8')
     return message
 

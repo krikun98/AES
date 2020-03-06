@@ -141,7 +141,7 @@ def encrypt(block, key, nb=4, nr=10):
     state = [s_box(a) for a in state]
     state = shift_rows(state)
     add_round_key(state, keys[nr * n:])
-    hexprint(state)
+    # hexprint(state)
     return "".join(map(chr, state))
 
 
